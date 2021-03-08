@@ -1,6 +1,6 @@
 # Time Resource UI in WebEng Testbed
 
-This application is built for easier manipulation of time resources<sup>[#](#footnote)</sup> in the [WebEng testbed environment](https://github.com/kaist-webeng/KSC2020_IoT_Framework).\
+This application is built for easier manipulation of time resources<sup>[#](#user-content-footnote)</sup> in the [WebEng testbed environment](https://github.com/kaist-webeng/KSC2020_IoT_Framework).\
 Currently, the repository of the time resources back-end is private.
 
 ## Available Scripts
