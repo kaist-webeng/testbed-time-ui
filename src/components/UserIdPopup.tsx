@@ -1,23 +1,35 @@
 import React from 'react';
+import { Modal, InputNumber } from 'antd';
+import 'antd/dist/antd.css';
 
 type UserIdPopupProps = {
     userId: number;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    isVisible: boolean;
+    onChange: (v: number) => void;
+    onClick: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-function UserIdPopup({ userId, onChange, onClick }: UserIdPopupProps) {
+function UserIdPopup({ userId, isVisible, onChange, onClick }: UserIdPopupProps) {
     return (
-        <div>
-            아직 USER-ID가 설정되어 있지 않아요.
-            <input 
+        <Modal
+            title="Welcome" 
+            closable={false} 
+            visible={isVisible}
+            cancelButtonProps={{ style: { display: 'none' } }}
+            okText="Confirm"
+            onOk={onClick}
+        >
+            <p>Please set your USER-ID to start using the time resources.</p>
+            <InputNumber 
                 name="userId"
                 type="number"
                 onChange={onChange}
                 value={userId}
+                autoFocus={true}
+                size="large"
+                onPressEnter={onClick}
             />
-            <button onClick={onClick}>설정하기</button>
-        </div>
+        </Modal>
     )
 }
 

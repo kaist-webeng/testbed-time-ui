@@ -9,24 +9,23 @@ function UserIdPopupContainer() {
     const isFirst = useSelector((state: RootState) => state.userId.isFirst);
     const dispatch = useDispatch();
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUid(parseInt(e.target.value));
+    const onChange = (v: number) => {
+        setUid(v);
     }
 
-    const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const onClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLInputElement>) => {
         e.preventDefault();
         dispatch(setUserId(uid));
     }
 
     return (
         <>
-            {isFirst && 
-                <UserIdPopup 
-                    userId={uid} 
-                    onChange={onChange} 
-                    onClick={onClick}
-                />
-            }
+            <UserIdPopup 
+                userId={uid}
+                isVisible={isFirst}
+                onChange={onChange} 
+                onClick={onClick}
+            />
         </>
     )
 }
