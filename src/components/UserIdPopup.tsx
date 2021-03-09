@@ -17,7 +17,7 @@ function UserIdPopup({
 }: UserIdPopupProps) {
   return (
     <Modal
-      title="Welcome"
+      title="User ID"
       closable={false}
       visible={isVisible}
       cancelButtonProps={{ style: { display: 'none' } }}
