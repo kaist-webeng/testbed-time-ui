@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import { 
     FunctionOutlined, 
@@ -8,27 +7,27 @@ import {
     UnorderedListOutlined 
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import './PageHeader.css';
-import { RootState } from '../modules';
-import { clearUserId } from '../modules/userId';
 
-function PageHeader() {
+type SidebarProps = {
+    children?: React.ReactNode;
+    collapsed: boolean;
+    userId: number;
+    onCollapse: (c: boolean) => void;
+    onChangeUserId: () => void;
+}
+
+function Sidebar({collapsed, userId, onCollapse, onChangeUserId }: SidebarProps) {
     const { Sider } = Layout;
     const { SubMenu } = Menu;
-    const [collapsed, setCollapsed] = useState(false);
-    const userId = useSelector((state: RootState) => state.userId.userId);
-    const dispatch = useDispatch();
-
-    const onCollapse = (c: boolean) => {
-        setCollapsed(c);
-    }
-
-    const onChangeUserId = () => {
-        dispatch(clearUserId());
-    }
 
     return (
-        <Sider collapsible={true} collapsed={collapsed} onCollapse={onCollapse}>
+        <Sider
+            collapsible={true} 
+            collapsed={collapsed}
+            collapsedWidth="0"
+            onCollapse={onCollapse}
+            breakpoint="md"
+        >
             <Menu theme="dark" mode="inline">
                 <SubMenu key="userIdSubMenu" icon={<UserOutlined />} title={userId}>
                     <Menu.Item 
@@ -49,4 +48,4 @@ function PageHeader() {
     )
 }
 
-export default withRouter(PageHeader);
+export default Sidebar;
