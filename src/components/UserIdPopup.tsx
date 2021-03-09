@@ -28,6 +28,7 @@ function UserIdPopup({ userId, isVisible, onChange, onClick }: UserIdPopupProps)
                 autoFocus={true}
                 size="large"
                 onPressEnter={onClick}
+                style={{minWidth: "10em"}}
             />
         </Modal>
     )
