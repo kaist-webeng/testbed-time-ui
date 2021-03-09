@@ -15,10 +15,10 @@ function App() {
   return (
     <>
       <UserIdPopupContainer />
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={{ minHeight: '100vh' }}>
         <SidebarContainer />
         <Switch>
-          <Route path="/" exact={true} component={ActionsPage} />
+          <Route path="/" exact component={ActionsPage} />
           <Route path="/list" component={TriggerListPage} />
           <Redirect path="*" to="/" />
         </Switch>

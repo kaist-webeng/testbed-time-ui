@@ -4,13 +4,13 @@ import 'antd/dist/antd.css';
 import styles from './ActionsPage.module.css';
 
 function ActionsPage() {
-    const { Content } = Layout;
+  const { Content } = Layout;
 
-    return (
-        <Content className={styles.ActionsPage}>
-            <h1>Available Functions</h1>
-        </Content>
-    )
+  return (
+    <Content className={styles.ActionsPage}>
+      <h1>Available Functions</h1>
+    </Content>
+  )
 }
 
 export default ActionsPage;

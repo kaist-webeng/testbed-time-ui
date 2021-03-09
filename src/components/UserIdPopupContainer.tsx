@@ -5,29 +5,29 @@ import { RootState } from '../modules';
 import UserIdPopup from './UserIdPopup';
 
 function UserIdPopupContainer() {
-    const [uid, setUid] = useState(0);
-    const isFirst = useSelector((state: RootState) => state.userId.isFirst);
-    const dispatch = useDispatch();
+  const [uid, setUid] = useState(0);
+  const isFirst = useSelector((state: RootState) => state.userId.isFirst);
+  const dispatch = useDispatch();
 
-    const onChange = (v: number) => {
-        setUid(v);
-    }
+  const onChange = (v: number) => {
+    setUid(v);
+  };
 
-    const onClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        dispatch(setUserId(uid));
-    }
+  const onClick = (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    dispatch(setUserId(uid));
+  };
 
-    return (
-        <>
-            <UserIdPopup 
-                userId={uid}
-                isVisible={isFirst}
-                onChange={onChange} 
-                onClick={onClick}
-            />
-        </>
-    )
+  return (
+    <>
+      <UserIdPopup
+        userId={uid}
+        isVisible={isFirst}
+        onChange={onChange}
+        onClick={onClick}
+      />
+    </>
+  );
 }
 
 export default UserIdPopupContainer;
