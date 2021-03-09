@@ -15,7 +15,12 @@ type SidebarProps = {
   onChangeUserId: () => void;
 }
 
-function Sidebar({ collapsed, userId, onCollapse, onChangeUserId }: SidebarProps) {
+function Sidebar({
+  collapsed,
+  userId,
+  onCollapse,
+  onChangeUserId,
+}: SidebarProps) {
   const { Sider } = Layout;
   const { SubMenu } = Menu;
 

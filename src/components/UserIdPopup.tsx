@@ -9,7 +9,12 @@ type UserIdPopupProps = {
   onClick: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-function UserIdPopup({ userId, isVisible, onChange, onClick }: UserIdPopupProps) {
+function UserIdPopup({
+  userId,
+  isVisible,
+  onChange,
+  onClick,
+}: UserIdPopupProps) {
   return (
     <Modal
       title="Welcome"

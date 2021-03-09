@@ -3,9 +3,9 @@ const SET_USER_ID = 'userId/SET_USER_ID' as const;
 const CLEAR_USER_ID = 'userId/CLEAR_USER_ID' as const;
 
 // action generator
-export const setUserId = (userId: number) => ({
+export const setUserId = (uid: number) => ({
   type: SET_USER_ID,
-  payload: userId,
+  payload: uid,
 });
 
 export const clearUserId = () => ({

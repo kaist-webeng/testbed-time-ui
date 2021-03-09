@@ -10,7 +10,7 @@ function TriggerListPage() {
     <Content className={styles.TriggerListPage}>
       <h1>Current Triggers</h1>
     </Content>
-  )
+  );
 }
 
 export default TriggerListPage;
