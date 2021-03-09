@@ -1,5 +1,6 @@
 // action type
 const SET_USER_ID = 'userId/SET_USER_ID' as const;
+const CLEAR_USER_ID = 'userId/CLEAR_USER_ID' as const;
 
 // action generator
 export const setUserId = (userId: number) => ({
@@ -7,7 +8,14 @@ export const setUserId = (userId: number) => ({
     payload: userId
 });
 
-type UserIdAction = ReturnType<typeof setUserId>;
+export const clearUserId = () => ({
+    type: CLEAR_USER_ID
+})
+
+type UserIdAction = 
+    | ReturnType<typeof setUserId>
+    | ReturnType<typeof clearUserId>;
+
 type UserIdState = {
     isFirst: boolean,
     userId: number
@@ -29,6 +37,11 @@ function userId(
                 isFirst: false,
                 userId: action.payload
             };
+        case CLEAR_USER_ID:
+            return {
+                ...state,
+                isFirst: true
+            }
         default:
             return state;
     }
