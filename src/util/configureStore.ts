@@ -12,9 +12,11 @@ const persistConfig = {
 
 const persistedReducer = persistReducer<any, any>(persistConfig, rootReducer);
 
-export default () => {
+const configureStore = () => {
     const store = createStore(persistedReducer);
     const persistor = persistStore(store);
 
     return { store, persistor };
 }
+
+export default configureStore;
