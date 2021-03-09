@@ -19,7 +19,7 @@ function UserIdPopup({ userId, isVisible, onChange, onClick }: UserIdPopupProps)
             okText="Confirm"
             onOk={onClick}
         >
-            <p>Please set your USER-ID to start using the time resources.</p>
+            <p>Please set your ID to start using the time resources.</p>
             <InputNumber 
                 name="userId"
                 type="number"
