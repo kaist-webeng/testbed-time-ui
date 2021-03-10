@@ -29,6 +29,7 @@ function UserIdPopup({
         name="userId"
         type="number"
         onChange={onChange}
+        defaultValue={userId}
         value={userId}
         autoFocus
         size="large"
