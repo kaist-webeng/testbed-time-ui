@@ -1,7 +1,10 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import rootReducer from '../modules';
+import logger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer, { rootSaga } from '../modules';
 
 const persistConfig = {
   key: 'root',
@@ -12,9 +15,19 @@ const persistConfig = {
 const persistedReducer = persistReducer<any, any>(persistConfig, rootReducer);
 
 const configureStore = () => {
-  const store = createStore(persistedReducer);
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+    persistedReducer,
+    composeWithDevTools(
+      applyMiddleware(
+        sagaMiddleware,
+        logger,
+      ),
+    ),
+  );
   const persistor = persistStore(store);
 
+  sagaMiddleware.run(rootSaga);
   return { store, persistor };
 };
 
