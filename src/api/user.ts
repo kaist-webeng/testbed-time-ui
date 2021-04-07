@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:8010';
+const baseUrl = 'http://blind.seiker.kr:8010';
 
 interface BindingSuccessResponse {
   userId: string,

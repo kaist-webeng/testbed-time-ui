@@ -22,7 +22,7 @@ export async function getStatus(id: number) {
   const response = await axios.get<StatusResponse>(
     baseUrl.concat('/resource'),
     {
-      headers: { 'USER-ID': id.toString() },
+      headers: { 'USER-ID': id },
       timeout: 2500,
     },
   );

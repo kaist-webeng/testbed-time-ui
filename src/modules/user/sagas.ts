@@ -21,7 +21,7 @@ import {
   BoundStatus,
 } from '../../api/user';
 
-function* bindResourceSaga(action: ReturnType<typeof bindResourceAsync.request>) {
+export function* bindResourceSaga(action: ReturnType<typeof bindResourceAsync.request>) {
   try {
     const bindResult: BindingResponse = yield call(bind, action.payload);
     yield put(bindResourceAsync.success(bindResult));
@@ -30,7 +30,7 @@ function* bindResourceSaga(action: ReturnType<typeof bindResourceAsync.request>)
   }
 }
 
-function* unbindResourceSaga(action: ReturnType<typeof unbindResourceAsync.request>) {
+export function* unbindResourceSaga(action: ReturnType<typeof unbindResourceAsync.request>) {
   try {
     const unbindResult: BindingResponse = yield call(unbind, action.payload);
     yield put(unbindResourceAsync.success(unbindResult));
@@ -39,7 +39,7 @@ function* unbindResourceSaga(action: ReturnType<typeof unbindResourceAsync.reque
   }
 }
 
-function* getBoundStatusSaga() {
+export function* getBoundStatusSaga() {
   try {
     const boundStatus: BoundStatus = yield call(isBound);
     yield put(getBoundStatusAsync.success(boundStatus));
