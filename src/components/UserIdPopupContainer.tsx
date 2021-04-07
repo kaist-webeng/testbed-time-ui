@@ -5,8 +5,8 @@ import { RootState } from '../modules';
 import UserIdPopup from './UserIdPopup';
 
 function UserIdPopupContainer() {
-  const [uid, setUid] = useState(0);
-  const isFirst = useSelector((state: RootState) => state.userId.isFirst);
+  const { userId: initialUid, isFirst } = useSelector((state: RootState) => state.userId);
+  const [uid, setUid] = useState(initialUid);
   const dispatch = useDispatch();
 
   const onChange = (v: number) => {
