@@ -2,11 +2,13 @@ import axios from 'axios';
 
 const baseUrl = 'http://blind.seiker.kr:8010';
 
-interface StatusSuccessResponse {
+export interface StatusSuccessResponse {
   [uuid: string]: {
     schedule: string,
     url: string,
     user: string,
+    header?: string,
+    form?: string,
   }
 }
 

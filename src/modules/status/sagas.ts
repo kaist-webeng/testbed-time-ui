@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import {
   all,
   call,
@@ -26,6 +27,7 @@ function* getTriggerListSaga(action: ReturnType<typeof getTriggerListAsync.reque
     const { bound, userId } = boundStatus.data!;
     const currentUserId: number = action.payload;
     if (bound && userId !== currentUserId.toString()) {
+      yield call(message.error, `The resource is occupied by the following user: ${userId}`);
       throw Error(`The resource is occupied by the following user: ${userId}`);
     }
     if (!bound) {
@@ -38,8 +40,10 @@ function* getTriggerListSaga(action: ReturnType<typeof getTriggerListAsync.reque
 
     // unbind the resource
     yield call(unbindResourceSaga, unbindResourceAsync.request(currentUserId));
+    yield call(message.success, 'Successfully loaded!');
   } catch (e) {
     yield put(getTriggerListAsync.failure(e));
+    yield call(message.error, 'Error occurred while loading.');
   }
 }
 
