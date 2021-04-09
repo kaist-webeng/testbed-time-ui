@@ -1,26 +1,17 @@
-import React, { useEffect } from 'react';
-import { Layout, Button } from 'antd';
+import React from 'react';
+import { Layout } from 'antd';
 import 'antd/dist/antd.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './TriggerListPage.module.css';
 
-import { getTriggerListAsync } from '../modules/status';
+import TriggerListHeaderContainer from '../components/TriggerListHeaderContainer';
 import { RootState } from '../modules';
 import { StatusResponse, StatusSuccessResponse } from '../api/status';
 
 function TriggerListPage() {
   const { Content } = Layout;
-
-  const userId = useSelector((state: RootState) => state.userId.userId);
-  const { loading, data } = useSelector((state: RootState) => state.status.statusResponse);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (data === null) {
-      dispatch(getTriggerListAsync.request(userId));
-    }
-  }, []);
+  const { data } = useSelector((state: RootState) => state.status.statusResponse);
 
   const isSuccessResponse = (r: StatusResponse | null): r is StatusSuccessResponse => {
     if (r !== null) {
@@ -31,15 +22,7 @@ function TriggerListPage() {
 
   return (
     <Content className={styles.TriggerListPage}>
-      <div className={styles.ContentTitleSection}>
-        <h1 className={styles.ContentTitle}>Current Triggers</h1>
-        <Button
-          onClick={() => dispatch(getTriggerListAsync.request(userId))}
-          loading={loading}
-        >
-          Refresh
-        </Button>
-      </div>
+      <TriggerListHeaderContainer />
       <div>
         {isSuccessResponse(data) && Object.keys(data).map((uuid) => (
           <div key={uuid}>
