@@ -1,43 +1,40 @@
 import React from 'react';
+import { Table } from 'antd';
 import { StatusSuccessResponse } from '../api/status';
+import columns from '../util/columnSetting';
 
 type TriggerListProps = {
   data: StatusSuccessResponse;
 }
 
+const convertStatusResponse = (r: StatusSuccessResponse) => Object.keys(r).map((uuid) => {
+  const ret = {
+    ...r[uuid],
+    uuid,
+  };
+  return ret;
+});
+
 function TriggerList({
   data,
 }: TriggerListProps) {
+  const statusData = convertStatusResponse(data);
   return (
-    <div>
-      {Object.keys(data).map((uuid) => (
-        <div key={uuid}>
-          <h4>{uuid}</h4>
-          <ul>
-            <li>
-              <>Schedule: </>
-              {data[uuid].schedule}
-            </li>
-            <li>
-              <>URL: </>
-              {data[uuid].url}
-            </li>
-            <li>
-              <>User ID: </>
-              {data[uuid].user}
-            </li>
-            <li>
-              <>Header: </>
-              {data[uuid].header}
-            </li>
-            <li>
-              <>Form: </>
-              {data[uuid].form}
-            </li>
-          </ul>
-        </div>
-      ))}
-    </div>
+    <>
+      <Table
+        columns={columns}
+        dataSource={statusData}
+        rowKey={(record) => record.uuid}
+        expandable={{
+          expandedRowRender: (record) => (
+            <>
+              <span>UUID of this trigger: </span>
+              <code style={{ userSelect: 'all' }}>{record.uuid}</code>
+            </>
+          ),
+        }}
+      />
+    </>
   );
 }
 
