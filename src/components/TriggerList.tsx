@@ -19,6 +19,21 @@ function TriggerList({
   data,
 }: TriggerListProps) {
   const statusData = convertStatusResponse(data);
+  const showLongData = (longData: string | undefined, longDataName: string) => {
+    if (longData && longData.length > 20) {
+      return (
+        <div>
+          <span>
+            {longDataName}
+            <> of this trigger:</>
+          </span>
+          <code style={{ userSelect: 'all' }}>{longData}</code>
+        </div>
+      );
+    }
+    return (<></>);
+  };
+
   return (
     <>
       <Table
@@ -28,8 +43,12 @@ function TriggerList({
         expandable={{
           expandedRowRender: (record) => (
             <>
-              <span>UUID of this trigger: </span>
-              <code style={{ userSelect: 'all' }}>{record.uuid}</code>
+              <div>
+                <span>UUID of this trigger: </span>
+                <code style={{ userSelect: 'all' }}>{record.uuid}</code>
+              </div>
+              {showLongData(record.header, 'Header')}
+              {showLongData(record.form, 'Form')}
             </>
           ),
         }}

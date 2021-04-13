@@ -41,7 +41,7 @@ const columns = [
         return (
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <code>{`${header.substring(0, 5)} ...`}</code>
-            <Tooltip title="Expand the description to check entire data.">
+            <Tooltip title="The data is too long, expand the description to check entire data.">
               <ExceptionOutlined
                 style={{ fontSize: '1.33em' }}
               />
@@ -61,7 +61,7 @@ const columns = [
         return (
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <code>{`${form.substring(0, 5)} ...`}</code>
-            <Tooltip title="Expand the description to check entire data.">
+            <Tooltip title="The data is too long, expand the description to check entire data.">
               <ExceptionOutlined
                 style={{ fontSize: '1.33em' }}
               />
