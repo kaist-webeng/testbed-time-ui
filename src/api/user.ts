@@ -22,6 +22,9 @@ export interface BoundStatus {
 export async function isBound() {
   const response = await axios.get<BoundStatus>(
     baseUrl.concat('/user'),
+    {
+      timeout: 2000,
+    },
   );
 
   return response.data;

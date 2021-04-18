@@ -3,6 +3,14 @@ import { Tooltip } from 'antd';
 import { ExceptionOutlined } from '@ant-design/icons';
 import cronstrue from 'cronstrue';
 
+const getCronString = (schedule: string) => {
+  try {
+    return cronstrue.toString(schedule);
+  } catch (e) {
+    return 'Invalid crontab schedule';
+  }
+};
+
 const columns = [
   {
     title: 'User ID',
@@ -14,7 +22,7 @@ const columns = [
     dataIndex: 'schedule',
     key: 'schedule',
     render: (schedule: string) => (
-      <Tooltip title={cronstrue.toString(schedule)}>
+      <Tooltip title={getCronString(schedule)}>
         <code>{schedule}</code>
       </Tooltip>
     ),
