@@ -13,16 +13,27 @@ import {
 } from './actions';
 import {
   addTrigger,
+  AddTriggerProps,
   removeTrigger,
+  RemoveTriggerProps,
   TriggerResponse,
 } from '../../api/trigger';
 import bindCallback from '../../util/bindCallback';
 
+function* addTriggerCallback(param: AddTriggerProps) {
+  const addResult: TriggerResponse = yield call(addTrigger, param);
+  yield put(addTriggerAsync.success(addResult));
+}
+
+function* removeTriggerCallback(param: RemoveTriggerProps) {
+  const removeResult: TriggerResponse = yield call(removeTrigger, param);
+  yield put(removeTriggerAsync.success(removeResult));
+}
+
 function* addTriggerSaga(action: ReturnType<typeof addTriggerAsync.request>) {
   try {
     const { id } = action.payload;
-    const addResult: TriggerResponse = yield call(bindCallback, id, addTrigger, action.payload);
-    yield put(addTriggerAsync.success(addResult));
+    yield call(bindCallback, id, addTriggerCallback, action.payload);
   } catch (e) {
     yield put(addTriggerAsync.failure(e));
   }
@@ -31,13 +42,7 @@ function* addTriggerSaga(action: ReturnType<typeof addTriggerAsync.request>) {
 function* removeTriggerSaga(action: ReturnType<typeof removeTriggerAsync.request>) {
   try {
     const { id } = action.payload;
-    const removeResult: TriggerResponse = yield call(
-      bindCallback,
-      id,
-      removeTrigger,
-      action.payload,
-    );
-    yield put(removeTriggerAsync.success(removeResult));
+    yield call(bindCallback, id, removeTriggerCallback, action.payload);
   } catch (e) {
     yield put(removeTriggerAsync.failure(e));
   }

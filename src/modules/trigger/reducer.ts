@@ -11,7 +11,12 @@ import {
 } from './actions';
 
 const initialState: TriggerState = {
-  triggerResponse: {
+  addTriggerResponse: {
+    loading: false,
+    error: null,
+    data: null,
+  },
+  removeTriggerResponse: {
     loading: false,
     error: null,
     data: null,
@@ -21,7 +26,7 @@ const initialState: TriggerState = {
 const trigger = createReducer<TriggerState, TriggerAction>(initialState, {
   [ADD_TRIGGER]: (state) => ({
     ...state,
-    triggerResponse: {
+    addTriggerResponse: {
       loading: true,
       error: null,
       data: null,
@@ -29,7 +34,7 @@ const trigger = createReducer<TriggerState, TriggerAction>(initialState, {
   }),
   [ADD_TRIGGER_SUCCESS]: (state, action) => ({
     ...state,
-    triggerResponse: {
+    addTriggerResponse: {
       loading: false,
       error: null,
       data: action.payload,
@@ -37,7 +42,7 @@ const trigger = createReducer<TriggerState, TriggerAction>(initialState, {
   }),
   [ADD_TRIGGER_FAILURE]: (state, action) => ({
     ...state,
-    triggerResponse: {
+    addTriggerResponse: {
       loading: false,
       error: action.payload,
       data: null,
@@ -45,7 +50,7 @@ const trigger = createReducer<TriggerState, TriggerAction>(initialState, {
   }),
   [REMOVE_TRIGGER]: (state) => ({
     ...state,
-    triggerResponse: {
+    removeTriggerResponse: {
       loading: true,
       error: null,
       data: null,
@@ -53,7 +58,7 @@ const trigger = createReducer<TriggerState, TriggerAction>(initialState, {
   }),
   [REMOVE_TRIGGER_SUCCESS]: (state, action) => ({
     ...state,
-    triggerResponse: {
+    removeTriggerResponse: {
       loading: false,
       error: null,
       data: action.payload,
@@ -61,7 +66,7 @@ const trigger = createReducer<TriggerState, TriggerAction>(initialState, {
   }),
   [REMOVE_TRIGGER_FAILURE]: (state, action) => ({
     ...state,
-    triggerResponse: {
+    removeTriggerResponse: {
       loading: false,
       error: action.payload,
       data: null,
