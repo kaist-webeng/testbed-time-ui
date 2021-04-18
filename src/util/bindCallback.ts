@@ -37,11 +37,12 @@ export default function* bindCallback<Fn extends(...args: any[]) => any>(
   }
 
   // successfully bound, so run callback
-  const callbackResult: ReturnType<typeof callback> = yield call<Fn>(callback, ...callbackArgs);
-
-  // unbind the resource
-  yield call(unbindResourceSaga, unbindResourceAsync.request(currentUserId));
-  yield call(message.success, 'Success');
-
-  return callbackResult;
+  try {
+    const callbackResult: ReturnType<typeof callback> = yield call<Fn>(callback, ...callbackArgs);
+    return callbackResult;
+  } finally {
+    // unbind the resource
+    yield call(unbindResourceSaga, unbindResourceAsync.request(currentUserId));
+    yield call(message.success, 'Success');
+  }
 }
