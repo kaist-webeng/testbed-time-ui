@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ChangeEventHandler, ReactNode } from 'react';
 import {
   Card,
   Input,
@@ -7,41 +7,12 @@ import {
   FormItemProps,
 } from 'antd';
 import styles from './AddTrigger.module.css';
+import { AddInputChangeState } from '../modules/addInput/types';
+import { AddInputType } from '../util/validateAddInput';
 
 type TriggerFormItem =
   & FormItemProps
   & { innerComponent: ReactNode }
-
-const formItems: TriggerFormItem[] = [
-  {
-    label: 'Schedule',
-    name: 'schedule',
-    rules: [{
-      required: true,
-      message: 'Please set the triggering schedule!',
-    }],
-    innerComponent: <Input />,
-  },
-  {
-    label: 'URL',
-    name: 'url',
-    rules: [{
-      required: true,
-      message: 'Please set the endpoint url!',
-    }],
-    innerComponent: <Input />,
-  },
-  {
-    label: 'Header',
-    name: 'header',
-    innerComponent: <Input.TextArea className={styles.CodeInput} autoSize={{ maxRows: 5 }} />,
-  },
-  {
-    label: 'Form',
-    name: 'form',
-    innerComponent: <Input.TextArea className={styles.CodeInput} autoSize={{ maxRows: 5 }} />,
-  },
-];
 
 type AddTriggerProps = {
   loading: boolean;
@@ -52,13 +23,59 @@ type AddTriggerProps = {
     form?: string,
   }) => void;
   functionResult: ReactNode;
+  validationStatus: AddInputChangeState;
+  onInputChange: (inputType: AddInputType) => ChangeEventHandler;
 }
 
 function AddTrigger({
   loading,
   onFinish,
   functionResult,
+  validationStatus,
+  onInputChange,
 }: AddTriggerProps) {
+  const formItems: TriggerFormItem[] = [
+    {
+      label: 'Schedule',
+      name: 'schedule',
+      rules: [{
+        required: true,
+        message: 'Please set the triggering schedule!',
+      }],
+      ...validationStatus.schedule,
+      innerComponent: <Input onChange={onInputChange('schedule')} />,
+    },
+    {
+      label: 'URL',
+      name: 'url',
+      rules: [{
+        required: true,
+        message: 'Please set the endpoint url!',
+      }],
+      innerComponent: <Input />,
+    },
+    {
+      label: 'Header',
+      name: 'header',
+      ...validationStatus.header,
+      innerComponent: <Input.TextArea
+        className={styles.CodeInput}
+        autoSize={{ maxRows: 5 }}
+        onChange={onInputChange('header')}
+      />,
+    },
+    {
+      label: 'Form',
+      name: 'form',
+      ...validationStatus.form,
+      innerComponent: <Input.TextArea
+        className={styles.CodeInput}
+        autoSize={{ maxRows: 5 }}
+        onChange={onInputChange('form')}
+      />,
+    },
+  ];
+
   return (
     <Card title="Add a New Trigger">
       <Form

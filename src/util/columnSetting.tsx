@@ -7,7 +7,7 @@ const getCronString = (schedule: string) => {
   try {
     return cronstrue.toString(schedule);
   } catch (e) {
-    return 'Invalid crontab schedule';
+    return 'Invalid crontab expression';
   }
 };
 
