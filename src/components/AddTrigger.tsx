@@ -6,6 +6,7 @@ import {
   Form,
   FormItemProps,
 } from 'antd';
+import styles from './AddTrigger.module.css';
 
 type TriggerFormItem =
   & FormItemProps
@@ -33,12 +34,12 @@ const formItems: TriggerFormItem[] = [
   {
     label: 'Header',
     name: 'header',
-    innerComponent: <Input.TextArea autoSize={{ maxRows: 5 }} />,
+    innerComponent: <Input.TextArea className={styles.CodeInput} autoSize={{ maxRows: 5 }} />,
   },
   {
     label: 'Form',
     name: 'form',
-    innerComponent: <Input.TextArea autoSize={{ maxRows: 5 }} />,
+    innerComponent: <Input.TextArea className={styles.CodeInput} autoSize={{ maxRows: 5 }} />,
   },
 ];
 
