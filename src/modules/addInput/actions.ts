@@ -1,5 +1,6 @@
 import { createAsyncAction } from 'typesafe-actions';
-import { ValidateAddInputProps, ValidationResult } from '../../util/validateAddInput';
+import { ValidateAddInputProps } from '../../util/validateAddInput';
+import { ChangeAddInputResult } from './types';
 
 export const CHANGE_ADD_INPUT = 'addInput/CHANGE_ADD_INPUT';
 export const CHANGE_ADD_INPUT_OK = 'addInput/CHANGE_ADD_INPUT_OK';
@@ -9,4 +10,4 @@ export const changeAddInputAsync = createAsyncAction(
   CHANGE_ADD_INPUT,
   CHANGE_ADD_INPUT_OK,
   CHANGE_ADD_INPUT_FAIL,
-)<ValidateAddInputProps, ValidationResult, ValidationResult>();
+)<ValidateAddInputProps, ChangeAddInputResult, ChangeAddInputResult>();

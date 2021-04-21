@@ -1,19 +1,19 @@
 import { createReducer } from 'typesafe-actions';
 
-import { AddInputChangeState, AddInputChangeAction } from './types';
+import { ChangeAddInputState, ChangeAddInputAction } from './types';
 import {
   CHANGE_ADD_INPUT,
   CHANGE_ADD_INPUT_OK,
   CHANGE_ADD_INPUT_FAIL,
 } from './actions';
 
-const initialState: AddInputChangeState = {
+const initialState: ChangeAddInputState = {
   schedule: {},
   header: {},
   form: {},
 };
 
-const addInput = createReducer<AddInputChangeState, AddInputChangeAction>(initialState, {
+const addInput = createReducer<ChangeAddInputState, ChangeAddInputAction>(initialState, {
   [CHANGE_ADD_INPUT]: (state, action) => ({
     ...state,
     [action.payload.inputType]: {
@@ -23,11 +23,11 @@ const addInput = createReducer<AddInputChangeState, AddInputChangeAction>(initia
   }),
   [CHANGE_ADD_INPUT_OK]: (state, action) => ({
     ...state,
-    [action.payload.inputType!]: action.payload,
+    [action.payload.inputType]: action.payload,
   }),
   [CHANGE_ADD_INPUT_FAIL]: (state, action) => ({
     ...state,
-    [action.payload.inputType!]: action.payload,
+    [action.payload.inputType]: action.payload,
   }),
 });
 

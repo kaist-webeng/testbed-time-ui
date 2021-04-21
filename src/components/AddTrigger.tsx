@@ -7,7 +7,7 @@ import {
   FormItemProps,
 } from 'antd';
 import styles from './AddTrigger.module.css';
-import { AddInputChangeState } from '../modules/addInput/types';
+import { ChangeAddInputState } from '../modules/addInput/types';
 import { AddInputType } from '../util/validateAddInput';
 
 type TriggerFormItem =
@@ -23,7 +23,7 @@ type AddTriggerProps = {
     form?: string,
   }) => void;
   functionResult: ReactNode;
-  validationStatus: AddInputChangeState;
+  validationStatus: ChangeAddInputState;
   onInputChange: (inputType: AddInputType) => ChangeEventHandler;
 }
 

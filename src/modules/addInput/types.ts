@@ -1,12 +1,16 @@
 import { ActionType } from 'typesafe-actions';
 
 import * as actions from './actions';
-import { ValidationResult } from '../../util/validateAddInput';
+import { AddInputType, ValidationResult } from '../../util/validateAddInput';
 
-export type AddInputChangeAction = ActionType<typeof actions>;
+export type ChangeAddInputAction = ActionType<typeof actions>;
 
-export type AddInputChangeState = {
+export type ChangeAddInputState = {
   schedule: ValidationResult;
   header: ValidationResult;
   form: ValidationResult;
 }
+
+export type ChangeAddInputResult =
+  & ValidationResult
+  & { inputType: AddInputType }

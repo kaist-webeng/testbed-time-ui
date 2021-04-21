@@ -7,7 +7,6 @@ export type AddInputType =
   | 'form'
 
 export interface ValidationResult {
-  inputType?: AddInputType;
   validateStatus?: 'success' | 'error' | 'validating';
   help?: string;
 }
@@ -25,20 +24,17 @@ export function validateAddInput({
     case 'schedule':
       if (input.length === 0) {
         return {
-          inputType,
           validateStatus: 'error',
           help: 'Please set the triggering schedule!',
         };
       }
       try {
         return {
-          inputType,
           validateStatus: 'success',
           help: cronstrue.toString(input),
         };
       } catch (e) {
         return {
-          inputType,
           validateStatus: 'error',
           help: 'Invalid crontab expression.',
         };
@@ -50,12 +46,10 @@ export function validateAddInput({
           JSON.parse(input);
         }
         return {
-          inputType,
           validateStatus: 'success',
         };
       } catch (e) {
         return {
-          inputType,
           validateStatus: 'error',
           help: 'Invalid JSON object.',
         };
