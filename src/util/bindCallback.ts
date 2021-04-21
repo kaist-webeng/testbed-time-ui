@@ -8,6 +8,8 @@ import { bindResourceAsync, unbindResourceAsync } from '../modules/user';
 const boundStatusSelector = (state: RootState) => state.user.boundStatus;
 const bindingResponseSelector = (state: RootState) => state.user.bindingResponse;
 
+// disabled no-explicit-any rule in order to accept "any" functions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function* bindCallback<Fn extends(...args: any[]) => any>(
   id: number,
   callback: Fn,
@@ -17,9 +19,12 @@ export default function* bindCallback<Fn extends(...args: any[]) => any>(
   if (boundStatus.error !== null) {
     throw boundStatus.error;
   }
+  if (boundStatus.data === null) {
+    throw Error('Failed to retrieve the resource status.');
+  }
 
   // check whether bounded and try binding
-  const { bound, userId } = boundStatus.data!;
+  const { bound, userId } = boundStatus.data;
   const currentUserId: number = id;
   if (bound && userId !== currentUserId.toString()) {
     yield call(message.error, `The resource is occupied by the following user: ${userId}`);
