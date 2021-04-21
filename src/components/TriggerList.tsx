@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import { StatusSuccessResponse } from '../api/status';
 import columns from '../util/columnSetting';
 
+type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
 type TriggerListProps = {
   data: StatusSuccessResponse;
 }
@@ -41,14 +42,18 @@ function TriggerList({
         dataSource={statusData}
         rowKey={(record) => record.uuid}
         expandable={{
-          expandedRowRender: (record) => (
+          expandedRowRender: ({
+            uuid,
+            header,
+            form,
+          }: ArrayElement<typeof statusData>) => (
             <>
               <div>
                 <span>UUID of this trigger: </span>
-                <code style={{ userSelect: 'all' }}>{record.uuid}</code>
+                <code style={{ userSelect: 'all' }}>{uuid}</code>
               </div>
-              {showLongData(record.header, 'Header')}
-              {showLongData(record.form, 'Form')}
+              {showLongData(header, 'Header')}
+              {showLongData(form, 'Form')}
             </>
           ),
         }}
