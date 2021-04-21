@@ -23,6 +23,13 @@ export function validateAddInput({
 }: ValidateAddInputProps): ValidationResult {
   switch (inputType) {
     case 'schedule':
+      if (input.length === 0) {
+        return {
+          inputType,
+          validateStatus: 'error',
+          help: 'Please set the triggering schedule!',
+        };
+      }
       try {
         return {
           inputType,
