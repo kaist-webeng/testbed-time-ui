@@ -12,7 +12,7 @@ const persistConfig = {
   whitelist: ['userId'],
 };
 
-const persistedReducer = persistReducer<any, any>(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
